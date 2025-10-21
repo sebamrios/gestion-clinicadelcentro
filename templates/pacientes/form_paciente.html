@@ -1,0 +1,100 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<hr>
+
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">    
+                    <h2 class="mb-4">{{ titulo }}</h2>
+
+                    <form method="POST">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="id_nombre" class="form-label">Nombre:</label>
+                            <input type="text" 
+                                   name="nombre" 
+                                   id="id_nombre" 
+                                   class="form-control {% if form.nombre.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.nombre.value|default_if_none:'' }}" 
+                                   required>
+                            {% for error in form.nombre.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_apellido" class="form-label">Apellido:</label>
+                            <input type="text" 
+                                   name="apellido" 
+                                   id="id_apellido" 
+                                   class="form-control {% if form.apellido.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.apellido.value|default_if_none:'' }}" 
+                                   required>
+                            {% for error in form.apellido.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_fecha_nac" class="form-label">Fecha de Nacimiento:</label>
+                            <input type="date" 
+                                   name="fecha_nac" 
+                                   id="id_fecha_nac" 
+                                   class="form-control {% if form.fecha_nac.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.fecha_nac.value|default_if_none:'' }}">
+                            {% for error in form.fecha_nac.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_documento" class="form-label">Documento:</label>
+                            <input type="text" 
+                                   name="documento" 
+                                   id="id_documento" 
+                                   class="form-control {% if form.documento.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.documento.value|default_if_none:'' }}" 
+                                   required>
+                            {% for error in form.documento.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_telefono" class="form-label">Teléfono:</label>
+                            <input type="text" 
+                                   name="telefono" 
+                                   id="id_telefono" 
+                                   class="form-control {% if form.telefono.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.telefono.value|default_if_none:'' }}">
+                            {% for error in form.telefono.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="id_obra_social" class="form-label">Obra Social:</label>
+                            <input type="text" 
+                                   name="obra_social" 
+                                   id="id_obra_social" 
+                                   class="form-control {% if form.obra_social.errors %}is-invalid{% endif %}" 
+                                   value="{{ form.obra_social.value|default_if_none:'' }}">
+                            {% for error in form.obra_social.errors %}
+                                <div class="invalid-feedback">{{ error }}</div>
+                            {% endfor %}
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="{% url 'listar_pacientes' %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

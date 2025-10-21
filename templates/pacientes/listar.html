@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <section id="especialidades" class="py-5 bg-light">
+    <div class="container">
+        <h2 class="text-center mb-5">{% block title %}PACIENTES{% endblock %}</h2>
+
+            <!-- Buscar paciente con autocompletado -->
+             <center> 
+            <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-text" >Paciente:</span>
+                    <input type="text" id="paciente-input" class="form-control" placeholder="Buscar paciente...">
+                    <input type="hidden" name="paciente_id" id="paciente_id">
+                    <!-- agregar nuevo paciente -->
+                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAgregarPaciente">
+                        <i class="bi bi-person-plus"></i>
+                    </button>
+                </div>
+            </div>
+            </center>
+
+
+            <div class="container mt-4">
+                <h2>Lista de Pacientes</h2>
+                <a href="{% url 'agregar_paciente' %}" class="btn btn-success mb-3">➕ Agregar Paciente</a>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Apellido</th>
+                            <th>Nombre</th>
+                            <th>Documento</th>
+                            <th>Fecha de Nac</th>
+                            <th>Teléfono</th>
+                            <th>Obra Social</th>
+                            <th>Acciones</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for paciente in pacientes %}
+                        <tr>
+                            <td>{{ paciente.apellido }}</td>
+                            <td>{{ paciente.nombre }}</td>
+                            <td>{{ paciente.documento }}</td>
+                            <td>{{ paciente.fecha_nac }}</td>
+                            <td>{{ paciente.telefono }}</td>
+                            <td>{{ paciente.obra_social }}</td>
+                            <td>
+                                <a href="{% url 'editar_paciente' paciente.pk %}" class="btn btn-warning btn-sm">✏️ Editar</a>
+                                <a href="{% url 'eliminar_paciente' paciente.pk %}" class="btn btn-danger btn-sm">🗑️ Eliminar</a>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>        
+{% endblock %}
+
+{% block extra_js %}
+    <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+    <script>
+        $(function() {
+            $("#paciente-input").autocomplete({
+                source: "{% url 'buscar_paciente' %}",
+                minLength: 2,
+                select: function(event, ui) {
+                    $("#paciente_id").val(ui.item.id);
+                }
+            });
+        });
+    </script>
+{% endblock %}

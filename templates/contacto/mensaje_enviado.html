@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% block title %}MENSAJE CONTACTO{% endblock %}
+{% load static %}
+{% load i18n %}
+
+<div class="container-fluid  "   >
+    <div class="row reflexion justify-content-center align-items-center  " style="padding-top:20px;">   
+        <div class="col-8  " style="padding-top:40px; padding-bottom: 40px;">
+            <div>
+                <center>
+                    <h1 style="color:rgb(0, 174, 255);">MUCHAS GRACIAS!<i class="fas fa-star"></i></h1>
+                    <p>En breve <b>se van a contactar con vos</b> para coordinar!</p>
+                    <p>Mientras tanto te invitamos a ver todos nuestros servicios en la <b style="color:rgb(0, 183, 255);"><a href="{% url 'lista_profesionales' %}" class="card-link"> en la seccion Especialidades</a></b></p> 
+                </center>    
+            </div>
+        </div>  
+     </div>
+ </div>
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<hr>
+<section class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">  
+                    <h1 class="text-center mb-4">BUSCAR PROFESIONAL</h1>
+                    
+                    <div class="form-group mb-4">
+                        <label for="profesional-input" class="form-label">Profesional:</label>
+                        <input type="text" id="profesional-input" class="form-control" placeholder="Nombre completo del profesional">
+                    </div>
+                    
+                    <div id="profesional-detail" class="mt-4 p-4 border rounded" style="display: none;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>        
+</section>
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+
+<script>
+    $(function() {
+        $("#profesional-input").autocomplete({
+            source: "{% url 'buscar_profesional' %}"
+        });
+    });
+</script>
+{% endblock %}
+
+

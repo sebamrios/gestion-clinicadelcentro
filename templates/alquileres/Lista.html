@@ -1,0 +1,110 @@
+{% extends 'base.html' %}
+{% block title %}Inicio - Clínica del Centro{% endblock %}
+{% load static %}
+{% block content %}
+
+<hr>
+<section class="container" style="background-color: rgba(188, 194, 192, 0.699);">
+  <div class="row">
+          <div class="col-12">
+            <h2 class="text-white text-center " >Alquiler de Consultorios</h2>
+            <div id="carouselExampleIndicators" class="carousel slide">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img src="{% static 'img/consultorio1.jpg' %}" class="d-block w-100" alt="Consultorio 1">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/consultorio1.jpg' %}" class="d-block w-100" alt="Consultorio 2">
+                    </div>
+                    <div class="carousel-item">
+                        <img src="{% static 'img/consultorio1.jpg' %}" class="d-block w-100" alt="Consultorio 3">
+                    </div>
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Anterior</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Siguiente</span>
+                </button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-5">Diferentes Modalidades de Alquiler</h2>
+        <div class="row g-4">
+            <div class="col-md-4 anim-card">
+                <div class="card h-100 shadow ">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Consultorio Exclusivo</h5>
+                        <p class="card-text">
+                            Ideal para profesionales que desean un espacio fijo y personalizado. Acceso exclusivo, decoración propia y disponibilidad total los días acordados.
+                        </p>
+                        <a href="#" class="card-link">+ Informacion</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 anim-card">
+                <div class="card h-100 shadow ">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Consultorio por Módulo</h5>
+                        <p class="card-text">
+                            Opción flexible con turnos por media jornada o jornada completa. Compartís el espacio con otros profesionales según horarios establecidos.
+                        </p>
+                        <a href="#" class="card-link">+ Informacion</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-4 anim-card">
+                <div class="card h-100 shadow ">
+                    <div class="card-body">
+                        <h5 class="card-title text-center">Consultorio por Hora</h5>
+                        <p class="card-text">
+                            Perfecto para quienes recién inician o requieren el consultorio de forma ocasional. Reservá solo las horas que necesitás.
+                        </p>
+                        <a href="#" class="card-link">+ Informacion</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+
+<script>
+    gsap.registerPlugin(ScrollTrigger);
+
+    const animCards = document.querySelectorAll('.anim-card');
+
+    gsap.from(animCards, {
+        scrollTrigger: {
+            trigger: ".row.g-4", 
+            start: "top 80%",
+            toggleActions: "restart none none none",
+        },
+        y: 50,
+        opacity: 0,
+        duration: 1.5,
+        stagger: 0.2,
+        ease: "power2.out"
+    });
+</script>
+{% endblock %}

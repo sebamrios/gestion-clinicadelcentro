@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% load filtros %}
+{% load static %}
+{% block content %}
+
+<hr>
+
+<form method="get" action="{% url 'filtrar_profesionales' %}" class="mb-4 row g-3">
+    <div class="col-md-3">
+        <h3>Especialidad:</h3>
+    </div>
+    <div class="col-md-6">
+        <select name="especialidad" class="form-select">
+            <option value="todas" {% if request.GET.especialidad == "todas" %}selected{% endif %}>
+                Todas las especialidades
+            </option>
+            {% for especialidad in especialidades %}
+                <option value="{{ especialidad.id }}" {% if request.GET.especialidad == especialidad.id|stringformat:"s" %}selected{% endif %}>
+                    {{ especialidad.nombre }}
+                </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="col-md-3">
+        <button type="submit" class="btn btn-primary w-100">Filtrar</button>
+    </div>
+</form>
+
+<hr>
+
+
+<!-- comenatraio -->
+{% comment %}
+    Usamos {% with %} para manejar que request.GET.especialidad pueda no existir.
+    Si no existe, tomamos "todas" como valor por defecto.
+{% endcomment %}
+{% with request.GET.especialidad|default:"todas" as especialidad_seleccionada %}
+
+<div class="row">
+    {% for profesional in profesionales|filtrar_especialidad:especialidad_seleccionada %}
+    <div class="col-md-4 mb-4 d-flex"> 
+        <div class="card flex-fill d-flex flex-column">
+            <img src="{% static 'img/defecto.png' %}" class="card-img-top pt-3" alt="..." style="width:30%; height:auto; margin:auto;">
+            <div class="card-body d-flex flex-column ">
+                <h5 class="card-title text-center">{{ profesional.nombre_completo }}</h5>
+                <p class="card-text text-center">{{ profesional.especialidad.nombre }}</p>
+                <ul>
+                    <li><strong>Población:</strong> {{ profesional.poblacion }}</li>
+                    <li><strong>Obras sociales:</strong> {{ profesional.obras_sociales }}</li>
+                    <li><strong>Contacto:</strong> {{ profesional.contacto }}</li>
+                    <li><strong>Horarios:</strong> {{ profesional.horarios }}</li>
+                </ul>
+                <div class="text-center mt-3">
+                    <p><strong>Escaneá para guardar el contacto:</strong></p>
+                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Nombre:%20{{ profesional.nombre_completo }}%0A{{ especialidad.nombre }}%0AContacto:%20{{ profesional.contacto }}%0AHorario:%20{{ profesional.horarios }}" alt="QR contacto {{ profesional.nombre_completo }}">
+                </div>
+                <!-- Boton -->
+                <div class="mt-auto pt-3 d-flex justify-content-center">
+                    <a href="#" class="btn btn-primary ">Solicitar Turno</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% empty %}
+        <p class="text-muted">No se encontraron profesionales con esa especialidad.</p>
+    {% endfor %}
+</div>
+
+{% endwith %}
+
+{% endblock %}

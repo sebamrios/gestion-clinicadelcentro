@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+{% load i18n %}
+
+<hr>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">    
+                    <center><h1>{% block title %}EDITAR PROFESIONAL{% endblock %}</h1></center>
+
+                    <form id="form_editar" action="{% url 'editar_profesional' profesional.id %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Profesional:</label>
+                            <input type="text" name="nombre_completo" value="{{ profesional.nombre_completo }}" maxlength="200" required id="nombre" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="poblacion" class="form-label">Población:</label>
+                            <input type="text" name="poblacion" value="{{ profesional.poblacion }}" maxlength="200" required id="poblacion" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado:</label>
+                            <select name="estado" id="estado" class="form-control">
+                                {% for value, label in estados %}
+                                    <option value="{{ value }}" {% if profesional.estado == value %}selected{% endif %}>
+                                        {{ label }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="patologia" class="form-label">Patología:</label>
+                            <input type="text" name="patologia" value="{{ profesional.patologia }}" maxlength="100" id="patologia" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="especialidad" class="form-label">Especialidad:</label>
+                            <select name="especialidad" id="especialidad" class="form-control" required>
+                                {% for especialidad in especialidades %}
+                                    <option value="{{ especialidad.id }}" {% if especialidad.id == profesional.especialidad.id %}selected{% endif %}>
+                                        {{ especialidad.nombre }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="obras_sociales" class="form-label">Obras sociales:</label>
+                            <input type="text" name="obras_sociales" value="{{ profesional.obras_sociales }}" maxlength="200" required id="obras_sociales" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="contacto" class="form-label">Contacto:</label>
+                            <input type="tel" name="contacto" value="{{ profesional.contacto }}" maxlength="200" required id="contacto" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="horarios" class="form-label">Horario:</label>
+                            <input type="text" name="horarios" value="{{ profesional.horarios }}" maxlength="200" required id="horarios" class="form-control">
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary">Guardar cambios</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{% static 'js/jquery.js' %}"></script>    
+{% endblock %}

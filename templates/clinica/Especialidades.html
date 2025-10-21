@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<hr>
+
+<section id="especialidades" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center mb-5">{% block title %}ESPECIALIDADES{% endblock %}</h2>
+    <div class="profesional">
+      {% for especialidad in especialidades%}
+      <div class="mb-5">
+        <ul>
+          <li><h3 class="text-primary">{{especialidad.id}} - {{ especialidad.nombre }} </h3></li>
+          <p>{{ especialidad.descripcion }}</p>
+          {% empty %}
+          <p class="text-muted">No hay profesionales registrados en esta especialidad.</p>
+          {% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </div>  
+  </div>
+</section>
+
+{% endblock %}

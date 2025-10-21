@@ -1,0 +1,170 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body"> 
+                    <center>
+                        <h2>AGENDA DE {{ agenda.profesional }}</h2>
+                    </center>
+                    <!-- Botón -->
+                    <center>
+                        <div class="col-8">
+                            <a href="{% url 'agenda_calendario' agenda.id %}" class="btn btn-primary w-100">
+                                Calendario
+                            </a>
+                        </div>
+                    </center>
+
+                    <hr>
+                    <center><h3>Agregar turno nuevo</h3></center>
+                    
+                    <form method="post" class="mb-4">
+                        {% csrf_token %}
+                        <div class="row g-2 align-items-end">
+
+                            <!-- Buscar paciente con autocompletado -->
+                            <div class="col-md-6">
+                                <div class="input-group">
+                                    <input type="text" id="paciente-input" class="form-control" placeholder="Buscar paciente...">
+                                    <input type="hidden" name="paciente_id" id="paciente_id">
+                                    <!-- agregar nuevo paciente -->
+                                    <button type="button" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#modalAgregarPaciente">
+                                        <i class="bi bi-person-plus"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Fecha y hora -->
+                            <div class="col-md-4">
+                                <input type="datetime-local" name="fecha_hora" id="fecha_hora" class="form-control" required>
+                            </div>
+
+                            <!-- Botón agregar turno -->
+                            <div class="col-md-2 d-grid">
+                                <button type="submit" class="btn btn-primary">Agregar</button>
+                            </div>
+
+                        </div>
+                    </form>
+
+                    <!-- Modal de agregar paciente --> 
+                    <div class="modal fade" id="modalAgregarPaciente" tabindex="-1" aria-labelledby="modalAgregarPacienteLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="modalAgregarPacienteLabel">Agregar Nuevo Paciente</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+                                </div>
+                                <div class="modal-body">
+
+                                    <form id="formAgregarPaciente" method="post" action="{% url 'agregar_paciente_ajax' %}">
+                                        {% csrf_token %}
+                                        <div class="mb-3">
+                                            <label for="apellido" class="form-label">Apellido:</label>
+                                            <input type="text" name="apellido" id="apellido" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="nombre" class="form-label">Nombre:</label>
+                                            <input type="text" name="nombre" id="nombre" class="form-control" required>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="documento" class="form-label">Documento:</label>
+                                            <input type="text" name="documento" id="documento" class="form-control" required>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary">Agregar Paciente</button>
+                                    </form>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr>
+                    <!-- Lista de Turnos de Pacientes por dia --> 
+                    <div style="max-height: 400px; overflow-y: auto;">
+                        {% for fecha, turnos_del_dia in turnos_por_dia.items %}
+                            <h5>{{ fecha }}</h5>
+                            <ul class="list-group mb-2">
+                                {% for turno in turnos_del_dia %}
+                                    <li class="list-group-item">
+                                        <a href="{% url 'editar_turno' turno.id %}">
+                                            {{ turno.fecha_hora|time:"H:i" }} - {{ turno.paciente }} ({{ turno.estado }})
+                                        </a>
+                                    </li>
+                                {% endfor %}
+                            </ul>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Script AJAX para agregar paciente -->
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const form = document.getElementById("formAgregarPaciente");
+    const selectPacienteHidden = document.getElementById("paciente_id");
+    const modal = new bootstrap.Modal(document.getElementById('modalAgregarPaciente'));
+
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); // evita el submit normal
+
+        const url = form.getAttribute("action");
+        const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+        const formData = new FormData(form);
+
+        fetch(url, {
+            method: "POST",
+            headers: {
+                "X-Requested-With": "XMLHttpRequest",
+                "X-CSRFToken": csrfToken
+            },
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Respuesta AJAX:", data);
+            if (data.success) {
+                // Rellenar input de búsqueda con el nuevo paciente
+                document.getElementById("paciente-input").value = data.nombre_completo;
+                selectPacienteHidden.value = data.id;
+
+                // Cerrar modal
+                modal.hide();
+
+                // Limpiar formulario
+                form.reset();
+            } else {
+                alert("Error: " + data.error);
+            }
+        })
+        .catch(err => {
+            console.error("Error en AJAX:", err);
+            alert("Ocurrió un error al agregar paciente");
+        });
+    });
+});
+</script>
+
+{% block extra_js %}
+<script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
+<script>
+    $(function() {
+        $("#paciente-input").autocomplete({
+            source: "{% url 'buscar_paciente' %}",
+            minLength: 2,
+            select: function(event, ui) {
+                $("#paciente_id").val(ui.item.id);
+            }
+        });
+    });
+</script>
+{% endblock %}
+
+{% endblock %}

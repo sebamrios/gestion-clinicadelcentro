@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">
+                    <h2>EDITAR TURNO</h2>
+
+                    {% if messages %}
+                        {% for message in messages %}
+                            <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label class="form-label">Paciente</label>
+                            <input type="text" class="form-control" value="{{ turno.paciente }}" readonly>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="fecha_hora" class="form-label">Fecha y Hora</label>
+                            <input type="datetime-local" id="fecha_hora" name="fecha_hora" class="form-control"
+                                value="{{ turno.fecha_hora|date:'Y-m-d\\TH:i' }}" required>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado</label>
+                            <select id="estado" name="estado" class="form-select" required>
+                                {% for key, label in estados %}
+                                    <option value="{{ key }}" {% if key == turno.estado %}selected{% endif %}>{{ label }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="motivo" class="form-label">Motivo</label>
+                            <textarea id="motivo" name="motivo" class="form-control">{{ turno.motivo }}</textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-success">Guardar Cambios</button>
+                        <a href="{% url 'ver_agenda' turno.agenda.id %}" class="btn btn-secondary">Cancelar</a>
+                    </form>
+                </div>
+            </div>
+         </div>
+    </div>                
+</div>
+{% endblock %}

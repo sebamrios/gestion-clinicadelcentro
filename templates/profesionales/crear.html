@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+{% load static %}
+{% load i18n %}
+
+<hr>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-8">
+            <div class="card shadow-sm mb-4">
+                <div class="card-body">    
+                    <center><h1>{% block title %}CARGAR PROFESIONAL{% endblock %}</h1></center>
+
+                    <form id="form_cargar" action="{% url 'crear_profesional' %}" method="post">
+                        {% csrf_token %}
+
+                        <div class="mb-3">
+                            <label for="nombre" class="form-label">Profesional:</label>
+                            <input type="text" name="profesional" maxlength="200" required id="nombre" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="poblacion" class="form-label">Población:</label>
+                            <input type="text" name="poblacion" maxlength="200" required id="poblacion" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="estado" class="form-label">Estado:</label>
+                            <input type="text" name="estado" maxlength="10" required id="estado" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="especialidad" class="form-label">Especialidad:</label>
+                            <select name="especialidad" id="especialidad" class="form-control" required>
+                                {% for especialidad in especialidades %}
+                                    <option value="{{ especialidad.id }}">{{ especialidad.nombre }}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="obras_sociales" class="form-label">Obras sociales:</label>
+                            <input type="text" name="obras_sociales" maxlength="200" required id="obras_sociales" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="contacto" class="form-label">Contacto:</label>
+                            <input type="tel" name="contacto" maxlength="200" required id="contacto" class="form-control">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="horarios" class="form-label">Horario:</label>
+                            <input type="text" name="horarios" maxlength="200" required id="horarios" class="form-control">
+                        </div>
+
+                        <div class="d-grid gap-2 col-6 mx-auto">
+                            <button type="submit" class="btn btn-primary">Enviar</button>
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<hr>
+{% endblock  %}
+
+{% block scripts %}
+	<script src="{% static 'js/jquery.js' %}"></script>	
+    <script>
+        $("#id_fecha_publicacion").datepicker({
+            inline: true
+        });
+    </script>
+{% endblock %}
