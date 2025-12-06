@@ -11,7 +11,7 @@ DEBUG = False
 
 # Dominio de PythonAnywhere
 ALLOWED_HOSTS = [
-    'clinicadelcentro.pythonanywhere.com',
+    'sebastianrios.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [
@@ -92,7 +92,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # carpeta que usará colle
 
 # Para tus archivos propios que antes estaban en STATICFILES_DIRS
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static_dev"),
+    os.path.join(BASE_DIR, "static"),
 ]
 
 MEDIA_URL = '/media/'
