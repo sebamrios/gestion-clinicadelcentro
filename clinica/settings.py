@@ -7,17 +7,15 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-e9ef!fj++8&1=kc%lsm@=t=hg7z)fk(3ldinyx$ur7d+krn#en'
 
 # En producción siempre debe estar en False
-DEBUG = False
+DEBUG = True
 
 # Dominio de PythonAnywhere
 ALLOWED_HOSTS = [
     'sebastianrios.pythonanywhere.com',
-<<<<<<< HEAD
-=======
+    'www.sebastianrios.pythonanywhere.com',
     'clinicadelcentro.pythonanywhere.com',
     '127.0.0.1',
     'localhost',
->>>>>>> e7a25227263884bfbd86d67284e56b9a2b17b35b
 ]
 
 INSTALLED_APPS = [
