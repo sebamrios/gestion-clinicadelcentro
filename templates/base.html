@@ -13,6 +13,13 @@
     {% load static %}
 </head>
 <body>
+    
+    <section id="seo-top">
+        {% block seo_relevante %}
+        <!-- Bloque SEO. Por defecto vacío. Cada página se personalizará en particular. -->
+        {% endblock %}
+    </section>
+
     <div class="container-fluid" style="background-color: rgb(255, 255, 255); padding: 0px; margin:0px;">
       <div class="row">
         <div class="col-12">
@@ -117,9 +124,7 @@
 
 
       {% block content %}
-      
-      <!-- contenido  -->
-
+        <!-- Bloque de contenido particular de cada template-->
       {% endblock %}
     
     </main>
@@ -148,7 +153,9 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.min.js"></script>
     
-    {% block extra_js %}{% endblock %}
+    {% block extra_js %}
+    
+    {% endblock %}
 
   </body>
 </html>

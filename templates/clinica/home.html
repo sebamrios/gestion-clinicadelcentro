@@ -1,6 +1,17 @@
 {% extends 'base.html' %}
-{% block title %}Inicio - Clínica del Centro{% endblock %}
 {% load static %}
+
+{% block title %}Inicio - Clínica del Centro{% endblock %}
+
+{% block seo %}
+    <meta name="description" content="Clínica del Centro en Posadas: atención médica integral, especialidades, turnos, profesionales y contacto.">
+    <meta name="keywords" content="clinica, salud, medicos, especialidades, turnos, posadas, consultorios, obras sociales">
+    <meta property="og:title" content="Clínica del Centro - Atención médica integral en Posadas">
+    <meta property="og:description" content="Conocé nuestras especialidades, profesionales y horarios de atención.">
+    <meta property="og:image" content="{% static 'img/clinica.jpg' %}">
+    <meta property="og:type" content="website">
+{% endblock %}
+
 {% block content %}
 
 <hr>
@@ -63,13 +74,13 @@
                             </div>
                         </div>
 
-                        {% empty %} 
+                        {% empty %}
                         <p class="text-muted">No hay profesionales en esta especialidad.</p>
                         {% endfor %}
                     </div>
                 </div>
             </div>
-            {% empty %} 
+            {% empty %}
             <p class="text-muted">No hay especialidades.</p>
             {% endfor %}
         </div>
@@ -120,16 +131,23 @@
     </div>
 </section>
 
-
 <hr>
 
 <section class="container" style="background-color: rgb(17, 163, 189);">
     <h2 class="text-center mb-4 anim-map">Dónde estamos</h2>
     <div class="row justify-content-center pb-3 anim-map">
-        <img src="{% static 'img/mapa.jpg' %}" class="w-50 h-100" alt="mapa">
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.3587900957677!2d-55.89574002440742!3d-27.36450811223261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457bf6c121b64fd%3A0x359e0977e3d83c6d!2sCl%C3%ADnica%20del%20Centro!5e0!3m2!1ses!2sar!4v1764978823053!5m2!1ses!2sar" 
+            width="600" 
+            height="450" 
+            style="border:0;" 
+            allowfullscreen="" 
+            loading="lazy" 
+            referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
     </div>
 </section>
- 
+
 {% endblock %}
 
 {% block extra_js %}
@@ -137,10 +155,8 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 
 <script>
-    // Registrar el plugin 
     gsap.registerPlugin(ScrollTrigger);
 
-    // Animación primera
     const somosItems = document.querySelectorAll('.anim-section');
     
     gsap.from(somosItems, {
@@ -156,11 +172,11 @@
         ease: "power2.out"
     });
 
-    // Animación turnos y contacto
     const contact = document.querySelectorAll('.contact-group');
+
     gsap.from("contact", {
         scrollTrigger: {
-            trigger: ".contact-group", 
+            trigger: ".contact-group",
             start: "top 80%",
             toggleActions: "restart none none none",
         },
@@ -170,6 +186,5 @@
         stagger: 0.2,
         ease: "power2.out"
     });
-    
 </script>
 {% endblock %}
