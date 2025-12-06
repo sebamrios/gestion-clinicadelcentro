@@ -28,6 +28,7 @@ def crear_profesional(request):
         especialidad = Especialidad.objects.get(id=especialidad_id)
         Profesional.objects.create(
             nombre_completo=nombre_completo,
+            patologia=patologia,
             poblacion=poblacion,
             especialidad=especialidad,
             obras_sociales=obras_sociales,
