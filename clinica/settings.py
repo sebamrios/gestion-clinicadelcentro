@@ -11,7 +11,7 @@ DEBUG = False
 
 # Dominio de PythonAnywhere
 ALLOWED_HOSTS = [
-    'clinicadelcentro.pythonanywhere.com',
+    'sebastianrios.pythonanywhere.com',
 ]
 
 INSTALLED_APPS = [
