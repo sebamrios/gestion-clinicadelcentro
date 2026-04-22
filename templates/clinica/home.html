@@ -4,33 +4,265 @@
 {% block title %}Inicio - Clínica del Centro{% endblock %}
 
 {% block seo %}
-    <meta name="description" content="Clínica del Centro en Posadas: atención médica integral, especialidades, turnos, profesionales y contacto.">
-    <meta name="keywords" content="clinica, salud, medicos, especialidades, turnos, posadas, consultorios, obras sociales">
-    <meta property="og:title" content="Clínica del Centro - Atención médica integral en Posadas">
-    <meta property="og:description" content="Conocé nuestras especialidades, profesionales y horarios de atención.">
-    <meta property="og:image" content="{% static 'img/clinica.jpg' %}">
-    <meta property="og:type" content="website">
+<meta name="description"
+    content="Clínica del Centro en Posadas: atención médica integral, especialidades, turnos, profesionales y contacto.">
+<meta name="keywords" content="clinica, salud, medicos, especialidades, turnos, posadas, consultorios, obras sociales">
+<meta property="og:title" content="Clínica del Centro - Atención médica integral en Posadas">
+<meta property="og:description" content="Conocé nuestras especialidades, profesionales y horarios de atención.">
+<meta property="og:image" content="{% static 'img/clinica.jpg' %}">
+<meta property="og:type" content="website">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+    .accordion-clinica .accordion-body {
+        background-color: #f0f9ff;
+    }
+
+    .accordion-clinica .accordion-button:not(.collapsed) {
+        background-color: #38b6ff;
+        color: white;
+    }
+
+    /* Tipografía estilo Blogger */
+    .titulo-blogger {
+        font-family: 'Fredoka', sans-serif;
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
+
+    .seccion-acerca {
+        font-family: 'Fredoka', sans-serif;
+        background-color: transparent;
+        padding: 80px 0;
+    }
+
+    .titulo-acerca-small {
+        font-size: 13px;
+        letter-spacing: 6px;
+        text-transform: uppercase;
+        color: #888;
+        margin-bottom: 10px;
+    }
+
+    .titulo-acerca {
+        font-size: 42px;
+        font-weight: 500;
+        letter-spacing: 10px;
+        text-transform: uppercase;
+        margin-bottom: 35px;
+    }
+
+    .parrafo-acerca {
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        line-height: 2;
+        color: #333;
+    }
+
+    .parrafo-acerca strong {
+        font-weight: 700;
+    }
+
+    .card-contacto {
+        background-color: #fff;
+        border-top: 4px solid #38b6ff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .card-contacto:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-contacto i {
+        color: #38b6ff;
+    }
+
+    .card-contacto .card-title {
+        color: #333;
+    }
+
+    .card-contacto .card-text {
+        color: #555;
+    }
+
+    .card-contacto .card-link {
+        color: #38b6ff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .card-contacto .card-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Sección CTA Alquiler */
+    .cta-alquiler {
+        background-color: #f0f0f0;
+        font-family: 'Fredoka', sans-serif;
+    }
+
+    .cta-titulo {
+        font-size: 28px;
+        font-weight: 600;
+        letter-spacing: 3px;
+        color: #333;
+    }
+
+    .cta-subtitulo {
+        font-size: 16px;
+        color: #555;
+        letter-spacing: 1px;
+    }
+
+    .cta-icono {
+        font-size: 2.5rem;
+        color: #38b6ff;
+        margin-bottom: 10px;
+    }
+
+    .cta-beneficio-texto {
+        font-size: 14px;
+        color: #444;
+        letter-spacing: 1px;
+    }
+
+    .btn-cta {
+        background-color: #25d366;
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 2px;
+        padding: 12px 30px;
+        border-radius: 30px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-cta:hover {
+        background-color: #1da851;
+        color: #fff;
+        transform: scale(1.05);
+    }
+
+    /* Logo Carousel */
+    .slider {
+        background: transparent;
+        height: 130px;
+        margin: auto;
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    .slider::before,
+    .slider::after {
+        background: linear-gradient(to right, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 100%);
+        content: "";
+        height: 130px;
+        position: absolute;
+        width: 100px;
+        z-index: 2;
+    }
+
+    .slider::after {
+        right: 0;
+        top: 0;
+        transform: rotateZ(180deg);
+    }
+
+    .slider::before {
+        left: 0;
+        top: 0;
+    }
+
+    .slide-track {
+        animation: scroll 60s linear infinite;
+        display: flex;
+        width: calc(180px * 18);
+        /* 9 logos duplicated = 18 */
+    }
+
+    .slide {
+        height: 130px;
+        width: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 10px;
+    }
+
+    .slide img {
+        max-height: 110px;
+        max-width: 100%;
+        object-fit: contain;
+    }
+
+    @keyframes scroll {
+        0% {
+            transform: translateX(0);
+        }
+
+        100% {
+            transform: translateX(calc(-180px * 9));
+        }
+    }
+
+    #seccion-efemerides {
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .carousel {
+        width: 100%;
+    }
+
+    .carousel-item {
+        /* standard height */
+    }
+
+    .carousel-item .contenido {
+        width: 100%;
+        display: flex;
+        align-items: center;
+    }
+
+    .icono-slide {
+        font-size: clamp(3rem, 10vw, 6rem);
+    }
+</style>
 {% endblock %}
 
 {% block content %}
 
-<hr>
-
 <main class="container">
-    <section class="py-5" style="background-color: #f8f9fa;">
+    <section class="seccion-acerca">
         <div class="container">
             <div class="row align-items-center">
+
                 <div class="col-md-5 mb-4 mb-md-0 anim-section">
-                    <img src="{% static 'img/clinica.jpg' %}" alt="Nuestro equipo" class="img-fluid rounded shadow">
+                    <img src="{% static 'img/logos/logo_clinicaDelCentro.png' %}" alt="Nuestro equipo"
+                        class="img-fluid rounded">
                 </div>
-                <div class="col-md-7 anim-section">
-                    <h2 class="mb-3">¿Quiénes somos?</h2>
-                    <p class="lead">
-                        En Clínica del Centro nos dedicamos al cuidado integral de la salud de nuestros pacientes.
-                        Nuestro equipo médico está conformado por profesionales comprometidos con brindar atención de calidad,
-                        acompañando cada etapa con calidez humana, innovación y compromiso.
+
+                <div class="col-md-7 anim-section text-center text-md-start">
+
+                    <div class="titulo-acerca-small">Acerca de</div>
+                    <h2 class="titulo-acerca">Nosotros</h2>
+
+                    <p class="parrafo-acerca text-md-start">
+                        Somos <strong>Clínica del Centro</strong>, un policonsultorio dedicado al cuidado integral de la
+                        salud.
+                        Nuestro equipo de profesionales trabaja con compromiso y dedicación para brindarte la atención
+                        más
+                        completa y personalizada.
+                        <strong>Un espacio donde tu bienestar es nuestra prioridad.</strong>
                     </p>
+
                 </div>
+
             </div>
         </div>
     </section>
@@ -38,42 +270,81 @@
 
 <hr>
 
+<section class="py-4 bg-white">
+    <div class="container">
+        <div class="slider">
+            <div class="slide-track">
+                <!-- 9 logos -->
+                <div class="slide"><img src="{% static 'img/logos/clinica_medica.png' %}" alt="Clínica Médica"></div>
+                <div class="slide"><img src="{% static 'img/logos/fonoaudiologia.png' %}" alt="Fonoaudiología"></div>
+                <div class="slide"><img src="{% static 'img/logos/logo-ecografia.png' %}" alt="Ecografía"></div>
+                <div class="slide"><img src="{% static 'img/logos/nutricion.png' %}" alt="Nutrición"></div>
+                <div class="slide"><img src="{% static 'img/logos/odontologia.png' %}" alt="Odontología"></div>
+                <div class="slide"><img src="{% static 'img/logos/otorrinologia.png' %}" alt="Otorrinolaringología">
+                </div>
+                <div class="slide"><img src="{% static 'img/logos/psicologia.png' %}" alt="Psicología"></div>
+                <div class="slide"><img src="{% static 'img/logos/traumatologia.png' %}" alt="Traumatología"></div>
+                <div class="slide"><img src="{% static 'img/logos/urologia.png' %}" alt="Urología"></div>
+
+                <!-- 9 logos duplicated for infinite scroll -->
+                <div class="slide"><img src="{% static 'img/logos/clinica_medica.png' %}" alt="Clínica Médica"></div>
+                <div class="slide"><img src="{% static 'img/logos/fonoaudiologia.png' %}" alt="Fonoaudiología"></div>
+                <div class="slide"><img src="{% static 'img/logos/logo-ecografia.png' %}" alt="Ecografía"></div>
+                <div class="slide"><img src="{% static 'img/logos/nutricion.png' %}" alt="Nutrición"></div>
+                <div class="slide"><img src="{% static 'img/logos/odontologia.png' %}" alt="Odontología"></div>
+                <div class="slide"><img src="{% static 'img/logos/otorrinologia.png' %}" alt="Otorrinolaringología">
+                </div>
+                <div class="slide"><img src="{% static 'img/logos/psicologia.png' %}" alt="Psicología"></div>
+                <div class="slide"><img src="{% static 'img/logos/traumatologia.png' %}" alt="Traumatología"></div>
+                <div class="slide"><img src="{% static 'img/logos/urologia.png' %}" alt="Urología"></div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
 <section id="especialidades" class="py-3 bg-light">
     <div class="container">
-        <h2 class="text-center mb-3 anim-specialties">Especialidades</h2>
-        <div class="accordion anim-specialties" id="accordionEspecialidades">
+        <h2 class="text-center mb-3 anim-specialties titulo-blogger">Especialidades</h2>
+        <div class="accordion accordion-clinica anim-specialties" id="accordionEspecialidades">
             {% for especialidad in especialidades %}
             <div class="accordion-item">
                 <h2 class="accordion-header" id="heading{{ especialidad.id }}">
-                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ especialidad.id }}" aria-expanded="false" aria-controls="collapse{{ especialidad.id }}">
+                    <button class="accordion-button accordion-clinica collapsed" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#collapse{{ especialidad.id }}">
                         {{ especialidad.nombre }}
                     </button>
                 </h2>
-                <div id="collapse{{ especialidad.id }}" class="accordion-collapse collapse" aria-labelledby="heading{{ especialidad.id }}" data-bs-parent="#accordionEspecialidades">
+                <div id="collapse{{ especialidad.id }}" class="accordion-collapse collapse"
+                    data-bs-parent="#accordionEspecialidades">
                     <div class="accordion-body">
                         <p>{{ especialidad.descripcion }}</p>
 
                         {% for profesional in especialidad.profesionales_activos %}
                         <div class="mb-3">
-                            <button class="btn btn-outline-secondary w-100 text-start" data-bs-toggle="collapse" data-bs-target="#profesional{{ profesional.id }}">
+                            <button class="btn btn-outline-secondary w-100 text-start" data-bs-toggle="collapse"
+                                data-bs-target="#profesional{{ profesional.id }}">
                                 {{ profesional.nombre_completo }}
                             </button>
+
                             <div class="collapse mt-2" id="profesional{{ profesional.id }}">
                                 <ul>
                                     <li><strong>Especialidad:</strong> {{ profesional.especialidad }}</li>
                                     <li><strong>Población:</strong> {{ profesional.poblacion }}</li>
-                                    <li><strong>Patologia:</strong> {{ profesional.patologia }}</li>
+                                    <li><strong>Patología:</strong> {{ profesional.patologia }}</li>
                                     <li><strong>Obras sociales:</strong> {{ profesional.obras_sociales }}</li>
                                     <li><strong>Contacto:</strong> {{ profesional.contacto }}</li>
                                     <li><strong>Horarios:</strong> {{ profesional.horarios }}</li>
                                 </ul>
+
                                 <div class="text-center mt-3">
                                     <p><strong>Escaneá para guardar el contacto:</strong></p>
-                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Nombre:%20{{ profesional.nombre_completo }}%0A{{ especialidad.nombre }}%0AContacto:%20{{ profesional.contacto }}%0AHorario:%20{{ profesional.horarios }}" alt="QR contacto {{ profesional.nombre_completo }}">
+                                    <img src="https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Nombre:%20{{ profesional.nombre_completo }}%0A{{ especialidad.nombre }}%0AContacto:%20{{ profesional.contacto }}%0AHorario:%20{{ profesional.horarios }}"
+                                        alt="QR contacto {{ profesional.nombre_completo }}">
                                 </div>
                             </div>
                         </div>
-
                         {% empty %}
                         <p class="text-muted">No hay profesionales en esta especialidad.</p>
                         {% endfor %}
@@ -89,14 +360,95 @@
 
 <hr>
 
-<section class="container pt-4 ">
+<section id="seccion-efemerides" class="py-4 bg-white ">
+    <div id="carouselEfemerides" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2500">
+        <div class="carousel-inner">
+            <!-- Slide 1 -->
+            <div class="carousel-item active rounded shadow"
+                style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                <div class="contenido container-fluid">
+                    <div class="row align-items-center justify-content-center p-4 p-md-5">
+                        <div class="col-md-3 text-center mb-3 mb-md-0">
+                            <i class="bi bi-balloon-heart text-white icono-slide"></i>
+                        </div>
+
+                        <div class="col-md-7 text-white text-center text-md-start">
+                            <h3 class="titulo-blogger mb-3 fw-bold" style="font-size: 2.5rem;">
+                                Octubre Rosa
+                            </h3>
+                            <p class="lead">
+                                Mes de Sensibilización sobre el Cáncer de Mama.
+                                Importancia de la detección temprana.
+                                <strong>¡Cuidate y hacete tus controles anuales!</strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-item" style="background: linear-gradient(135deg, #38b6ff 0%, #1e8bcc 100%);">
+                <div class="contenido container-fluid">
+                    <div class="row align-items-center justify-content-center p-4 p-md-5">
+                        <div class="col-md-3 text-center mb-3 mb-md-0">
+                            <i class="bi bi-heart-pulse text-white icono-slide"></i>
+                        </div>
+                        <div class="col-md-7 text-white text-center text-md-start">
+                            <h3 class="titulo-blogger mb-3 fw-bold" style="font-size: 2.5rem;">
+                                Día del Médico
+                            </h3>
+                            <p class="lead">
+                                Saludamos a los profesionales que cuidan la salud
+                                de nuestra comunidad con compromiso y vocación.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-item" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <div class="contenido container-fluid">
+                    <div class="row align-items-center justify-content-center p-4 p-md-5">
+                        <div class="col-md-3 text-center mb-3 mb-md-0">
+                            <i class="bi bi-calendar-heart text-white icono-slide"></i>
+                        </div>
+                        <div class="col-md-7 text-white text-center text-md-start">
+                            <h3 class="titulo-blogger mb-3 fw-bold" style="font-size: 2.5rem;">
+                                Día de la Secretaria
+                            </h3>
+                            <p class="lead">
+                                Agradecemos el esfuerzo, dedicación y profesionalidad de quienes nos asisten cada
+                                día.
+                                ¡Felicidades!
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles -->
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselEfemerides" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+        </button>
+
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselEfemerides" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+        </button>
+    </div>
+</section>
+
+<hr>
+
+<section class="container pt-4 anim-contact">
     <div class="row justify-content-center">
 
-        <!-- Card 1 -->
-        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center">
-            <div class="card h-100  w-100 shadow-sm">
+        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center anim-card">
+            <div class="card h-100 w-100 shadow-sm card-contacto">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Horario</h5>
+                    <i class="bi bi-clock" style="font-size: 2rem;"></i>
+                    <h5 class="card-title titulo-blogger mt-2">HORARIOS</h5>
                     <p class="card-text">
                         De Lunes a Viernes <br>
                         08:00 hs. a 12:00 hs.<br>
@@ -106,24 +458,24 @@
             </div>
         </div>
 
-        <!-- Card 2 -->
-        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center">
-            <div class="card h-100 w-100 shadow-sm">
+        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center anim-card">
+            <div class="card h-100 w-100 shadow-sm card-contacto">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Turnos</h5>
+                    <i class="bi bi-whatsapp" style="font-size: 2rem;"></i>
+                    <h5 class="card-title titulo-blogger mt-2">TURNOS</h5>
                     <p class="card-text">3764-141891</p>
-                    <a href="#" class="card-link">Escribinos un mensaje</a>
+                    <a href="https://wa.me/543764141891" target="_blank" class="card-link">Escribinos un mensaje</a>
                 </div>
             </div>
         </div>
 
-        <!-- Card 3 -->
-        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center">
-            <div class="card h-100 w-100 shadow-sm">
+        <div class="col-12 col-md-4 mb-4 d-flex justify-content-center anim-card">
+            <div class="card h-100 w-100 shadow-sm card-contacto">
                 <div class="card-body text-center">
-                    <h5 class="card-title">Contacto</h5>
+                    <i class="bi bi-envelope" style="font-size: 2rem;"></i>
+                    <h5 class="card-title titulo-blogger mt-2">CONTACTO</h5>
                     <p class="card-text">clinicadelcentro.posadas@gmail.com</p>
-                    <a href="#" class="card-link">Escribinos un email</a>
+                    <a href="mailto:clinicadelcentro.posadas@gmail.com" class="card-link">Escribinos un email</a>
                 </div>
             </div>
         </div>
@@ -133,20 +485,36 @@
 
 <hr>
 
-<section class="container" style="background-color: rgb(17, 163, 189);">
-    <h2 class="text-center mb-4 anim-map">Dónde estamos</h2>
-    <div class="row justify-content-center pb-3 anim-map">
+
+<section class="container anim-map rounded shadow" style="background-color: rgb(138, 146, 148); overflow: hidden;">
+    <h2 class="text-center mb-4 mt-4 titulo-blogger" style="color: rgb(249, 250, 250)">Nuestra ubicación</h2>
+    <div class=" row justify-content-center pb-3">
         <iframe
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.3587900957677!2d-55.89574002440742!3d-27.36450811223261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457bf6c121b64fd%3A0x359e0977e3d83c6d!2sCl%C3%ADnica%20del%20Centro!5e0!3m2!1ses!2sar!4v1764978823053!5m2!1ses!2sar" 
-            width="600" 
-            height="450" 
-            style="border:0;" 
-            allowfullscreen="" 
-            loading="lazy" 
-            referrerpolicy="no-referrer-when-downgrade">
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3543.3587900957677!2d-55.89574002440742!3d-27.36450811223261!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x9457bf6c121b64fd%3A0x359e0977e3d83c6d!2sCl%C3%ADnica%20del%20Centro!5e0!3m2!1ses!2sar!4v1764978823053!5m2!1ses!2sar"
+            width="600" height="450" style="border:0; border-radius: 12px;" allowfullscreen="" loading="lazy">
         </iframe>
     </div>
 </section>
+
+<hr>
+
+<section class="cta-alquiler py-5 text-center rounded shadow">
+    <div class="container">
+
+        <i class="bi bi-key mb-3" style="font-size: 3rem; color: #38b6ff;"></i>
+        <h2 class="cta-titulo mt-2">
+            ¿SOS PROFESIONAL DE LA SALUD?<br>
+            ¿BUSCÁS UN LUGAR DONDE ATENDER?
+        </h2>
+
+        <p class="cta-subtitulo mt-3">
+            Te ofrecemos alquiler de <strong>consultorios médicos</strong> para profesionales de la salud.
+        </p>
+
+    </div>
+</section>
+
+<hr>
 
 {% endblock %}
 
@@ -157,34 +525,21 @@
 <script>
     gsap.registerPlugin(ScrollTrigger);
 
-    const somosItems = document.querySelectorAll('.anim-section');
-    
-    gsap.from(somosItems, {
-        scrollTrigger: {
-            trigger: '.anim-section',
-            start: "top 80%",
-            toggleActions: "restart none none none",
-        },
-        x: 50,
-        opacity: 0,
-        duration:1.5,
-        stagger: 0.2,
-        ease: "power2.out"
-    });
+    const animCards = document.querySelectorAll('.anim-card');
 
-    const contact = document.querySelectorAll('.contact-group');
-
-    gsap.from("contact", {
-        scrollTrigger: {
-            trigger: ".contact-group",
-            start: "top 80%",
-            toggleActions: "restart none none none",
-        },
-        y: 50,
-        opacity: 0,
-        duration: 1.5,
-        stagger: 0.2,
-        ease: "power2.out"
-    });
+    if (animCards.length > 0) {
+        gsap.from(animCards, {
+            scrollTrigger: {
+                trigger: ".anim-contact",
+                start: "top 80%",
+                toggleActions: "restart none none none",
+            },
+            y: 50,
+            opacity: 0,
+            duration: 1.5,
+            stagger: 0.2,
+            ease: "power2.out"
+        });
+    }
 </script>
 {% endblock %}

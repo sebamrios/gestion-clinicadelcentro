@@ -1,18 +1,148 @@
 {% extends 'base.html' %}
-{% block title %}Inicio - Clínica del Centro{% endblock %}
+{% block title %}Alquileres - Clínica del Centro{% endblock %}
 {% load static %}
+
+{% block extra_css %}
+<style>
+    /* Tipografía */
+    .titulo-blogger {
+        font-family: 'Fredoka', sans-serif;
+        font-weight: 400;
+        letter-spacing: 1px;
+    }
+
+    .parrafo-acerca {
+        font-size: 14px;
+        letter-spacing: 3px;
+        text-transform: uppercase;
+        line-height: 2;
+        color: #333;
+    }
+
+    .parrafo-acerca strong {
+        font-weight: 700;
+    }
+
+    /* Iconos y Beneficios */
+    .cta-icono {
+        font-size: 2.5rem;
+        color: #38b6ff;
+        margin-bottom: 10px;
+    }
+
+    .cta-beneficio-texto {
+        font-size: 14px;
+        color: #444;
+        letter-spacing: 1px;
+    }
+
+    /* Tarjetas Asesoría y Contacto */
+    .card-contacto {
+        background-color: #38b6ff;
+        color: #fff;
+        border: none;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .card-contacto:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(17, 163, 189, 0.4);
+    }
+
+    .card-contacto .card-title {
+        color: #fff;
+    }
+
+    .card-contacto .card-text {
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .card-contacto .card-link {
+        color: #fff;
+        text-decoration: underline;
+        font-weight: 500;
+    }
+
+    .card-contacto .card-link:hover {
+        color: #d4f5e9;
+    }
+
+    /* Tarjetas Modulos/Modalidad */
+    .card-modalidad {
+        border-top: 4px solid #38b6ff;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        border-radius: 10px;
+    }
+
+    .card-modalidad:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-modalidad .card-link {
+        color: #38b6ff;
+        text-decoration: none;
+        font-weight: 500;
+    }
+
+    .card-modalidad .card-link:hover {
+        text-decoration: underline;
+    }
+
+    /* Botón CTA Whatsapp */
+    .btn-cta {
+        background-color: #25d366;
+        color: #fff;
+        font-weight: 600;
+        letter-spacing: 2px;
+        padding: 12px 30px;
+        border-radius: 30px;
+        border: none;
+        transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .btn-cta:hover {
+        background-color: #1da851;
+        color: #fff;
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+
 {% block content %}
 
+<section id="especialidades" class="py-3 bg-light">
+    <div class="container">
+        <h1 class="text-center titulo-blogger">CONSULTORIOS EN ALQUILE/h1>
+    </div>
+</section>
+
 <hr>
-<section class="container" style="background-color: rgba(188, 194, 192, 0.699);">
-  <div class="row">
-          <div class="col-12">
-            <h2 class="text-white text-center " >Alquiler de Consultorios</h2>
+
+<section class="seccion-acerca">
+    <div class="container">
+        <div class="row">
+            <p class="text-center parrafo-acerca mb-5" style="color: #555; font-size: 1.05rem;">
+                Consultorios listos para usar, con todo lo que necesitás para recibir a tus pacientes con comodidad y
+                profesionalismo.
+            </p>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="container" style="padding: 40px 0; border-radius: 10px;">
+    <div class="row">
+        <div class="col-12">
             <div id="carouselExampleIndicators" class="carousel slide">
                 <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+                        class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"
+                        aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"
+                        aria-label="Slide 3"></button>
                 </div>
                 <div class="carousel-inner">
                     <div class="carousel-item active">
@@ -25,11 +155,13 @@
                         <img src="{% static 'img/consultorio1.jpg' %}" class="d-block w-100" alt="Consultorio 3">
                     </div>
                 </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Anterior</span>
                 </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"
+                    data-bs-slide="next">
                     <span class="carousel-control-next-icon" aria-hidden="true"></span>
                     <span class="visually-hidden">Siguiente</span>
                 </button>
@@ -42,46 +174,195 @@
 
 <section class="py-5" style="background-color: #f8f9fa;">
     <div class="container">
-        <h2 class="text-center mb-5">Diferentes Modalidades de Alquiler</h2>
+
+        <h2 class="text-center mb-3 titulo-blogger">¿Qué servicios ofrecemos?</h2>
+
+
+        <div class="row justify-content-center g-4 text-center">
+            <div class="col-6 col-md-3">
+                <i class="bi bi-snow cta-icono"></i>
+                <p class="cta-beneficio-texto">Consultorios<br><strong>climatizados y equipados</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-person-workspace cta-icono"></i>
+                <p class="cta-beneficio-texto">Secretaría para<br><strong>gestión de turnos</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-lamp cta-icono"></i>
+                <p class="cta-beneficio-texto">Sala de espera<br><strong>confortable y ambientada</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-cup-hot cta-icono"></i>
+                <p class="cta-beneficio-texto">Kitchenette<br><strong>para profesionales</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-door-open cta-icono"></i>
+                <p class="cta-beneficio-texto">Baños<br><strong>exclusivos para profesionales</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-wifi cta-icono"></i>
+                <p class="cta-beneficio-texto">WiFi de<br><strong>alta velocidad</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-calendar-check cta-icono"></i>
+                <p class="cta-beneficio-texto">Modalidades<br><strong>flexibles de alquiler</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-person-badge cta-icono"></i>
+                <p class="cta-beneficio-texto">Servicio de<br><strong>Recepcionista</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-badge-wc cta-icono"></i>
+                <p class="cta-beneficio-texto">Baños adaptados<br><strong>para discapacitados</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-person-wheelchair"></i>
+                <p class="cta-beneficio-texto">Ingreso con<br><strong>rampa accesible</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-heart-pulse cta-icono"></i>
+                <p class="cta-beneficio-texto">Servicio de<br><strong>emergencia</strong></p>
+            </div>
+            <div class="col-6 col-md-3">
+                <i class="bi bi-laptop cta-icono"></i>
+                <p class="cta-beneficio-texto">Agenda digital<br><strong>para los profesionales</strong></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="py-5" style="background-color: #ffffff;">
+    <div class="container">
+        <h2 class="text-center mb-5 titulo-blogger">¿Qué modalidad te interesa?</h2>
         <div class="row g-4">
             <div class="col-md-4 anim-card">
-                <div class="card h-100 shadow ">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultorio Exclusivo</h5>
-                        <p class="card-text">
-                            Ideal para profesionales que desean un espacio fijo y personalizado. Acceso exclusivo, decoración propia y disponibilidad total los días acordados.
+                <div class="card h-100 shadow-sm card-modalidad">
+                    <div class="card-body text-center">
+                        <h5 class="card-title titulo-blogger">Consultorio Exclusivo</h5>
+                        <p class="card-text text-start mt-3">
+                            Ideal para profesionales que desean un espacio fijo y personalizado. Acceso exclusivo,
+                            decoración propia y disponibilidad total los días acordados.
                         </p>
-                        <a href="#" class="card-link">+ Informacion</a>
+                        <a href="#" class="card-link">+ Información</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 anim-card">
-                <div class="card h-100 shadow ">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultorio por Módulo</h5>
-                        <p class="card-text">
-                            Opción flexible con turnos por media jornada o jornada completa. Compartís el espacio con otros profesionales según horarios establecidos.
+                <div class="card h-100 shadow-sm card-modalidad">
+                    <div class="card-body text-center">
+                        <h5 class="card-title titulo-blogger">Consultorio por Módulo</h5>
+                        <p class="card-text text-start mt-3">
+                            Opción flexible con turnos por media jornada o jornada completa. Compartís el espacio con
+                            otros profesionales según horarios establecidos.
                         </p>
-                        <a href="#" class="card-link">+ Informacion</a>
+                        <a href="#" class="card-link">+ Información</a>
                     </div>
                 </div>
             </div>
 
             <div class="col-md-4 anim-card">
-                <div class="card h-100 shadow ">
-                    <div class="card-body">
-                        <h5 class="card-title text-center">Consultorio por Hora</h5>
-                        <p class="card-text">
-                            Perfecto para quienes recién inician o requieren el consultorio de forma ocasional. Reservá solo las horas que necesitás.
+                <div class="card h-100 shadow-sm card-modalidad">
+                    <div class="card-body text-center">
+                        <h5 class="card-title titulo-blogger">Consultorio por Hora</h5>
+                        <p class="card-text text-start mt-3">
+                            Perfecto para quienes recién inician o requieren el consultorio de forma ocasional. Reservá
+                            solo las horas que necesitás.
                         </p>
-                        <a href="#" class="card-link">+ Informacion</a>
+                        <a href="#" class="card-link">+ Información</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+<hr>
+
+<section class="py-5" style="background-color: #f8f9fa;">
+    <div class="container">
+        <h2 class="text-center mb-5 titulo-blogger">¿Qué necesitas para contratar?</h2>
+        <div class="row justify-content-center g-4">
+            <!-- Row 1 -->
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-card-text" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">DNI</h5>
+                    <p class="small text-muted mb-0">Documento Nacional de Identidad vigente.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-award" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">Matrícula</h5>
+                    <p class="small text-muted mb-0">Matrícula Profesional habilitante.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-file-earmark-check" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">Monotributo</h5>
+                    <p class="small text-muted mb-0">Constancia de Inscripción actualizada.</p>
+                </div>
+            </div>
+            <!-- Row 2 -->
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-shield-check" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">Seguros</h5>
+                    <p class="small text-muted mb-0">Mala Praxis y Responsabilidad Civil.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-mortarboard" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">Título Profesional</h5>
+                    <p class="small text-muted mb-0">Copia de tu título o certificado analítico.</p>
+                </div>
+            </div>
+            <div class="col-md-4 text-center">
+                <div class="p-4 rounded shadow-sm h-100"
+                    style="background-color: #ffffff; border-top: 4px solid #38b6ff;">
+                    <i class="bi bi-building-check" style="font-size: 2.5rem; color: #38b6ff;"></i>
+                    <h5 class="mt-3 titulo-blogger">Inscripción al Colegio</h5>
+                    <p class="small text-muted mb-0">Constancia de empadronamiento o colegiatura.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
+
+<section class="py-5">
+    <div class="container">
+        <h2 class="text-center mb-5 titulo-blogger">¿Querés que te asesoremos?</h2>
+        <div class="row g-4 justify-content-center">
+            <div class="col-md-8 anim-card">
+                <div class="card h-100 shadow-sm card-contacto text-center">
+                    <div class="card-body py-5">
+                        <i class="bi bi-whatsapp"
+                            style="font-size: 3rem; margin-bottom: 15px; display: inline-block;"></i>
+                        <h5 class="card-title titulo-blogger mb-4" style="font-size: 1.5rem;">Comunicate con nosotros
+                            para brindarte la mejor asesoría</h5>
+
+                        <a href="https://wa.me/543764711507" target="_blank"
+                            class="btn-cta mt-4 d-inline-block text-decoration-none">MENSAJE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<hr>
 
 {% endblock %}
 
@@ -96,7 +377,7 @@
 
     gsap.from(animCards, {
         scrollTrigger: {
-            trigger: ".row.g-4", 
+            trigger: ".row.g-4",
             start: "top 80%",
             toggleActions: "restart none none none",
         },

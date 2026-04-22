@@ -1,7 +1,7 @@
 from django.db import models
 
 class Especialidad(models.Model):
-    nombre = models.CharField(max_length=100)
+    nombre = models.CharField(max_length=200)
     descripcion = models.TextField()
 
     class Meta:

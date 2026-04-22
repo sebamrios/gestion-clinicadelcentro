@@ -3,6 +3,7 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.db.models import Prefetch
 from django.utils.timezone import localdate
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from collections import defaultdict
 from datetime import timedelta
 from myApps.pacientes.models import Paciente
@@ -17,11 +18,12 @@ def index(request):
     return HttpResponse("Bienvenido a la gestión de turnos")
 
 
+@login_required
 def elegir_agenda(request):
     agendas = Agenda.objects.select_related("profesional").all()
     return render(request, "turnos/elegir_agenda.html", {"agendas": agendas})
 
-
+@login_required
 def ver_agenda(request, agenda_id):
     agenda = get_object_or_404(Agenda, id=agenda_id)
 
@@ -64,7 +66,7 @@ def ver_agenda(request, agenda_id):
         },
     )
 
-
+@login_required
 def editar_turno(request, turno_id):
     turno = get_object_or_404(Turno, id=turno_id)
 
@@ -85,6 +87,7 @@ def editar_turno(request, turno_id):
 # ======================
 # Vistas para FullCalendar
 # ======================
+@login_required
 def calendario_profesional(request, agenda_id):
     """
     Renderiza el calendario gráfico (FullCalendar) de un profesional
@@ -92,6 +95,7 @@ def calendario_profesional(request, agenda_id):
     agenda = get_object_or_404(Agenda, id=agenda_id)
     return render(request, "turnos/calendario.html", {"agenda": agenda})
 
+@login_required
 def turnos_json(request, agenda_id):
     """
     Devuelve los turnos de una agenda en formato JSON para FullCalendar
@@ -115,6 +119,7 @@ def turnos_json(request, agenda_id):
         })
     return JsonResponse(eventos, safe=False)
 
+@login_required
 def agenda_calendario(request, agenda_id):
     agenda = get_object_or_404(Agenda, id=agenda_id)
     return render(request, "turnos/calendario.html", {"agenda": agenda})

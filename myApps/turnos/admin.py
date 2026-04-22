@@ -26,6 +26,7 @@ class AgendaAdmin(admin.ModelAdmin):
 # ======================
 # Admin de Turno
 # ======================
+
 @admin.register(Turno)
 class TurnoAdmin(admin.ModelAdmin):
     list_display = ('fecha_hora', 'paciente', 'profesional', 'estado', 'creado_por', 'modificado_por', 'historial')

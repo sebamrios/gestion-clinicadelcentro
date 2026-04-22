@@ -16,6 +16,8 @@ ALLOWED_HOSTS = [
     'clinicadelcentro.pythonanywhere.com',
     '127.0.0.1',
     'localhost',
+    '192.168.0.65',
+    '*',
 ]
 
 INSTALLED_APPS = [
@@ -97,6 +99,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')   # carpeta que usará colle
 # Para tus archivos propios que antes estaban en STATICFILES_DIRS
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "static_dev"),
 ]
 
 MEDIA_URL = '/media/'
